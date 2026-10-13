@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHIPAWAK | Detección de Microplásticos</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Configuración de colores personalizados en Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            light: '#48B8E0', // Color agua claro
+                            DEFAULT: '#0085CA', // Color ODS 6
+                            dark: '#005F9E',
+                            accent: '#38D430', // Verde ecológico del logo
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Estilos personalizados para animaciones sutiles */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #0085CA, #38D430);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand selection:text-white">
+
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <i class="fa-solid fa-droplet text-brand text-3xl"></i>
+                    <span class="font-extrabold text-2xl tracking-tighter text-slate-900">CHIPAWAK</span>
+                </div>
+                <!-- Menú Desktop -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#problema" class="text-slate-600 hover:text-brand font-medium transition">El Problema</a>
+                    <a href="#solucion" class="text-slate-600 hover:text-brand font-medium transition">La Solución</a>
+                    <a href="#ods" class="text-slate-600 hover:text-brand font-medium transition">ODS #6</a>
+                    <a href="#negocio" class="text-slate-600 hover:text-brand font-medium transition">Plan de Negocios</a>
+                    <a href="#equipo" class="text-slate-600 hover:text-brand font-medium transition">Equipo</a>
+                </div>
+                <!-- Menú Mobile Botón -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate-600 hover:text-brand focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Menú Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 px-4 py-2 shadow-lg">
+            <a href="#problema" class="block py-3 text-slate-600 hover:text-brand font-medium border-b border-slate-50">El Problema</a>
+            <a href="#solucion" class="block py-3 text-slate-600 hover:text-brand font-medium border-b border-slate-50">La Solución</a>
+            <a href="#ods" class="block py-3 text-slate-600 hover:text-brand font-medium border-b border-slate-50">ODS #6</a>
+            <a href="#negocio" class="block py-3 text-slate-600 hover:text-brand font-medium border-b border-slate-50">Plan de Negocios</a>
+            <a href="#equipo" class="block py-3 text-slate-600 hover:text-brand font-medium">Equipo</a>
+        </div>
+    </nav>
+
+    <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-slate-900">
+        <div class="absolute inset-0">
+            <!-- Imagen de fondo de agua (placeholder de alta calidad) -->
+            <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=2070&auto=format&fit=crop" alt="Agua cristalina" class="w-full h-full object-cover opacity-30" />
+            <div class="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent"></div>
+        </div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
+            <div class="max-w-3xl">
+                <span class="inline-block py-1 px-3 rounded-full bg-brand-accent/20 text-brand-accent font-semibold text-sm mb-6 border border-brand-accent/50 shadow-[0_0_15px_rgba(56,212,48,0.3)]">
+                    Desarrollo Tecnológico para el Agua
+                </span>
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white tracking-tight leading-tight mb-6">
+                    Detectando lo invisible para un <span class="text-brand-light">futuro cristalino</span>.
+                </h1>
+                <p class="text-lg md:text-xl text-slate-300 mb-10 leading-relaxed max-w-2xl">
+                    CHIPAWAK es un sistema integral de bajo costo para el diagnóstico, recopilación de datos y análisis de microplásticos en cuerpos de agua.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#solucion" class="px-8 py-4 bg-brand hover:bg-brand-light text-white font-bold rounded-full transition-all transform hover:-translate-y-1 hover:shadow-lg hover:shadow-brand/50 text-center text-lg">
+                        Conoce el Dispositivo
+                    </a>
+                    <a href="#negocio" class="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-bold rounded-full backdrop-blur-sm border border-white/20 transition-all text-center text-lg">
+                        Ver Modelo de Negocios
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Ondas decorativas en la parte inferior -->
+        <div class="absolute bottom-0 left-0 right-0">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" class="w-full h-auto text-slate-50 fill-current">
+                <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"></path>
+            </svg>
+        </div>
+    </header>
+
+    <section id="problema" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-brand font-bold tracking-wide uppercase text-sm mb-2">La Problemática</h2>
+                    <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6">El peligro oculto en cada gota</h3>
+                    <p class="text-slate-600 text-lg mb-6 leading-relaxed">
+                        Los microplásticos son fragmentos de plástico menores a 5 milímetros que han invadido nuestros ecosistemas acuáticos. Pasan desapercibidos a simple vista, pero su impacto es devastador.
+                    </p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-red-100 flex items-center justify-center border border-red-200 mt-1">
+                                <i class="fa-solid fa-xmark text-red-500 text-xs"></i>
+                            </div>
+                            <p class="ml-3 text-slate-600"><b>Impacto en la Salud Humana:</b> Estudios demuestran la presencia de microplásticos en pulmones, sangre y el tracto digestivo, causando inflamación y potenciales riesgos respiratorios y celulares.</p>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 rounded-full bg-red-100 flex items-center justify-center border border-red-200 mt-1">
+                                <i class="fa-solid fa-xmark text-red-500 text-xs"></i>
+                            </div>
+                            <p class="ml-3 text-slate-600"><b>Contaminación de la Red Hídrica:</b> Desde las cisternas domésticas hasta los grandes mantos acuíferos, la falta de diagnóstico impide tomar medidas preventivas.</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="relative">
+                    <!-- Ilustración abstracta del problema -->
+                    <div class="aspect-square bg-slate-200 rounded-3xl overflow-hidden relative shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1618426034176-6953f402f08a?q=80&w=2070&auto=format&fit=crop" alt="Contaminación del agua" class="object-cover w-full h-full opacity-80 mix-blend-multiply">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="glass-card p-6 rounded-2xl max-w-xs text-center shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500">
+                                <i class="fa-solid fa-lungs-virus text-4xl text-red-500 mb-4"></i>
+                                <h4 class="font-bold text-slate-900 mb-2">Ingesta y Respiración</h4>
+                                <p class="text-sm text-slate-600">Estamos consumiendo microplásticos sin darnos cuenta a través del agua de uso diario.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Decoración -->
+                    <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-brand-accent/20 rounded-full blur-2xl z-[-1]"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="solucion" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-brand font-bold tracking-wide uppercase text-sm mb-2">La Solución</h2>
+                <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6">El Dispositivo CHIPAWAK</h3>
+                <p class="text-slate-600 text-lg">
+                    Un sistema innovador que combina electrónica IoT de bajo costo, marcadores químicos y biotecnología para diagnosticar y combatir la presencia de microplásticos.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Tarjeta 1: Electrónica -->
+                <div class="bg-slate-50 rounded-3xl p-8 border border-slate-100 hover:shadow-xl transition-shadow duration-300 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-blue-100 rounded-bl-full -z-0 transition-transform group-hover:scale-110"></div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-brand rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-brand/30 text-white text-2xl">
+                            <i class="fa-solid fa-microchip"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-900 mb-3">Diagnóstico IoT (ESP32)</h4>
+                        <p class="text-slate-600">
+                            Utilizamos un módulo <b>ESP32-CAM</b> como cerebro principal con conexión Wi-Fi, acoplado a sensores analógicos de turbidez. Esto permite la extracción de muestras mediante mini bombas y el monitoreo remoto en tiempo real en nuestra celda transparente.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 2: Detección -->
+                <div class="bg-slate-50 rounded-3xl p-8 border border-slate-100 hover:shadow-xl transition-shadow duration-300 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-pink-100 rounded-bl-full -z-0 transition-transform group-hover:scale-110"></div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-pink-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-pink-500/30 text-white text-2xl">
+                            <i class="fa-solid fa-eye-dropper"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-900 mb-3">Reacción con Rojo Nilo</h4>
+                        <p class="text-slate-600">
+                            La cámara captura imágenes del agua circulando en la celda acrílica. Planteamos el uso de marcadores como el <b>tinte Rojo Nilo</b> (Nile Red) que se adhiere a los polímeros y los hace fluorescentes bajo luz específica, permitiendo un análisis cualitativo visual.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 3: Bio-Filtros -->
+                <div class="bg-slate-50 rounded-3xl p-8 border border-slate-100 hover:shadow-xl transition-shadow duration-300 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-green-100 rounded-bl-full -z-0 transition-transform group-hover:scale-110"></div>
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-brand-accent rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-brand-accent/30 text-white text-2xl">
+                            <i class="fa-solid fa-leaf"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-900 mb-3">Filtros Biológicos (I+D)</h4>
+                        <p class="text-slate-600">
+                            Alineados a la economía circular, proponemos el desarrollo futuro de filtros usando materiales orgánicos con alta capacidad de retención, tales como: lana de oveja, cabello humano, micelio de hongo e hidrocoloides (caparazones de crustáceos).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ods" class="py-20 bg-brand text-white overflow-hidden relative">
+        <!-- Decoración de fondo -->
+        <div class="absolute inset-0 opacity-10">
+            <svg class="h-full w-full" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <pattern id="bubbles" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                        <circle cx="25" cy="25" r="15" fill="white" />
+                        <circle cx="75" cy="75" r="10" fill="white" />
+                    </pattern>
+                </defs>
+                <rect x="0" y="0" width="100%" height="100%" fill="url(#bubbles)" />
+            </svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/3 flex justify-center">
+                    <!-- Icono simulado del ODS 6 -->
+                    <div class="bg-[#00A9E0] p-8 rounded-3xl shadow-2xl border-4 border-white transform rotate-3">
+                        <div class="text-center">
+                            <h2 class="text-6xl font-extrabold mb-2">6</h2>
+                            <p class="text-xl font-bold uppercase border-b-2 border-white pb-2 mb-4">Agua Limpia y<br>Saneamiento</p>
+                            <i class="fa-solid fa-hand-holding-droplet text-6xl"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-2/3">
+                    <h2 class="text-3xl md:text-5xl font-extrabold mb-6">Nuestro Compromiso Global</h2>
+                    <p class="text-xl text-blue-100 mb-6 leading-relaxed">
+                        CHIPAWAK nace de la urgencia por cumplir el Objetivo de Desarrollo Sostenible #6 de la ONU. Garantizar la disponibilidad de agua y su gestión sostenible y saneamiento para todos.
+                    </p>
+                    <p class="text-lg text-white font-medium mb-8">
+                        Al desarrollar dispositivos accesibles para detectar contaminantes emergentes (microplásticos), empoderamos a instituciones, gobiernos y sociedad civil para tomar decisiones informadas sobre el agua que consumen, protegiendo así también el ODS #14 (Vida Submarina) y ODS #3 (Salud).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="negocio" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-brand font-bold tracking-wide uppercase text-sm mb-2">Modelo Operativo</h2>
+                <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900">Plan de Negocios</h3>
+            </div>
+
+            <!-- Canvas Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+                
+                <!-- Propuesta de Valor -->
+                <div class="glass-card p-6 rounded-2xl shadow-sm border-t-4 border-t-brand">
+                    <div class="flex items-center gap-3 mb-4 text-brand">
+                        <i class="fa-solid fa-gem text-2xl"></i>
+                        <h4 class="font-bold text-lg text-slate-900">Propuesta de Valor</h4>
+                    </div>
+                    <p class="text-sm text-slate-600">Recopilación y análisis cuantitativo y cualitativo de los datos para el diagnóstico de microplásticos en el agua (Inicialmente en CUGDL).</p>
+                </div>
+
+                <!-- Socios Clave -->
+                <div class="glass-card p-6 rounded-2xl shadow-sm border-t-4 border-t-brand-accent">
+                    <div class="flex items-center gap-3 mb-4 text-brand-accent">
+                        <i class="fa-solid fa-handshake text-2xl"></i>
+                        <h4 class="font-bold text-lg text-slate-900">Socios Clave</h4>
+                    </div>
+                    <ul class="text-sm text-slate-600 list-disc list-inside space-y-1">
+                        <li>Red Universitaria UDG (Académicos, Estudiantes).</li>
+                        <li>Organismos gestores (CONAGUA, SIAPA).</li>
+                        <li>Empresas de cisternas (ej. Rotoplas).</li>
+                        <li>Bienes raíces y condominios.</li>
+                        <li>ONGs de conservación.</li>
+                    </ul>
+                </div>
+
+                <!-- Segmentos de Mercado -->
+                <div class="glass-card p-6 rounded-2xl shadow-sm border-t-4 border-t-orange-400">
+                    <div class="flex items-center gap-3 mb-4 text-orange-400">
+                        <i class="fa-solid fa-users-viewfinder text-2xl"></i>
+                        <h4 class="font-bold text-lg text-slate-900">Segmentos de Mercado</h4>
+                    </div>
+                    <ul class="text-sm text-slate-600 list-disc list-inside space-y-1">
+                        <li>Particulares y Condominios.</li>
+                        <li>Empresas industriales.</li>
+                        <li>Centros de investigación.</li>
+                        <li>Organizaciones Ambientales.</li>
+                        <li>Plantas de tratamiento.</li>
+                    </ul>
+                </div>
+
+                <!-- Actividades y Recursos -->
+                <div class="glass-card p-6 rounded-2xl shadow-sm border-t-4 border-t-purple-500 lg:col-span-2">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <div class="flex items-center gap-3 mb-4 text-purple-500">
+                                <i class="fa-solid fa-gears text-xl"></i>
+                                <h4 class="font-bold text-lg text-slate-900">Actividades Clave</h4>
+                            </div>
+                            <p class="text-sm text-slate-600">Diagnóstico, monitoreo constante y detección óptica de microplásticos en cuerpos de agua.</p>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-3 mb-4 text-purple-500">
+                                <i class="fa-solid fa-cube text-xl"></i>
+                                <h4 class="font-bold text-lg text-slate-900">Recursos Clave</h4>
+                            </div>
+                            <p class="text-sm text-slate-600">Impresoras 3D, componentes electrónicos, plataforma web (servidor de datos) y capital humano.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Relación, Distribución e Ingresos -->
+                <div class="glass-card p-6 rounded-2xl shadow-sm border-t-4 border-t-pink-500">
+                    <div class="flex items-center gap-3 mb-4 text-pink-500">
+                        <i class="fa-solid fa-money-bill-trend-up text-xl"></i>
+                        <h4 class="font-bold text-lg text-slate-900">Ingresos & Canales</h4>
+                    </div>
+                    <ul class="text-sm text-slate-600 list-disc list-inside space-y-1">
+                        <li><b>Ingresos:</b> Donaciones, Campañas, Concursos, Financiamiento UDG.</li>
+                        <li><b>Canales:</b> Sitio web, Redes Sociales, Trato Cara a cara.</li>
+                        <li><b>Distribución:</b> En sitio, a domicilio.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Estructura de Costos (Tabla) -->
+            <div class="bg-white rounded-3xl shadow-lg overflow-hidden border border-slate-200">
+                <div class="bg-brand p-6">
+                    <h4 class="text-white font-bold text-xl flex items-center gap-3">
+                        <i class="fa-solid fa-file-invoice-dollar"></i> Estructura de Costes (Por Dispositivo)
+                    </h4>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-600 text-sm uppercase tracking-wider">
+                                <th class="p-4 font-semibold border-b border-slate-200">Cant.</th>
+                                <th class="p-4 font-semibold border-b border-slate-200">Componente</th>
+                                <th class="p-4 font-semibold border-b border-slate-200">Descripción</th>
+                                <th class="p-4 font-semibold border-b border-slate-200 text-right">Costo Estimado (MXN)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm text-slate-700 divide-y divide-slate-100">
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="p-4">1</td>
+                                <td class="p-4 font-medium">Módulo ESP32-CAM</td>
+                                <td class="p-4 text-slate-500">Cerebro principal, conexión Wi-Fi y captura de imágenes (OV2640).</td>
+                                <td class="p-4 text-right">$230 - $300</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="p-4">1</td>
+                                <td class="p-4 font-medium">Adaptador USB-TTL (FTDI)</td>
+                                <td class="p-4 text-slate-500">Programación y carga inicial de código al microcontrolador.</td>
+                                <td class="p-4 text-right">$60 - $90</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="p-4">1</td>
+                                <td class="p-4 font-medium">Sensor de Turbidez Analógico</td>
+                                <td class="p-4 text-slate-500">Monitoreo continuo de la opacidad y calidad del agua en el aljibe.</td>
+                                <td class="p-4 text-right">$120 - $180</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="p-4">1</td>
+                                <td class="p-4 font-medium">Mini Bomba Sumergible (5V DC)</td>
+                                <td class="p-4 text-slate-500">Extracción controlada de la muestra de agua hacia la celda.</td>
+                                <td class="p-4 text-right">$50 - $90</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="p-4">1</td>
+                                <td class="p-4 font-medium">Módulo Relé de 1 Canal (5V)</td>
+                                <td class="p-4 text-slate-500">Interruptor electrónico para accionar la bomba.</td>
+                                <td class="p-4 text-right">$20 - $40</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="p-4">1</td>
+                                <td class="p-4 font-medium">Celda Transparente y Malla</td>
+                                <td class="p-4 text-slate-500">Compartimiento acrílico con filtro fino.</td>
+                                <td class="p-4 text-right">$60 - $120</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="p-4">1</td>
+                                <td class="p-4 font-medium">Caja Estanca (Tipo IP67)</td>
+                                <td class="p-4 text-slate-500">Protección impermeable para alojar la electrónica.</td>
+                                <td class="p-4 text-right">$100 - $200</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="p-4">1</td>
+                                <td class="p-4 font-medium">Power Bank / Fuente 5V</td>
+                                <td class="p-4 text-slate-500">Alimentación portátil o fija para autonomía operativa.</td>
+                                <td class="p-4 text-right">$150 - $250</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="p-4">Varios</td>
+                                <td class="p-4 font-medium">Manguera y Cables Dupont</td>
+                                <td class="p-4 text-slate-500">Conexiones eléctricas y tubería de flujo.</td>
+                                <td class="p-4 text-right">$50 - $80</td>
+                            </tr>
+                            <!-- Fijos -->
+                            <tr class="bg-blue-50/50">
+                                <td class="p-4">1 año</td>
+                                <td class="p-4 font-medium">Página Web</td>
+                                <td class="p-4 text-slate-500">Difusión del dispositivo (Servidor/Dominio base).</td>
+                                <td class="p-4 text-right">$50</td>
+                            </tr>
+                            <tr class="bg-blue-50/50">
+                                <td class="p-4">Mensual</td>
+                                <td class="p-4 font-medium">Gastos Operacionales</td>
+                                <td class="p-4 text-slate-500">Papelería, traslados, investigación.</td>
+                                <td class="p-4 text-right">$300</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr class="bg-slate-800 text-white font-bold">
+                                <td colspan="3" class="p-4 text-right">INVERSIÓN INICIAL ESTIMADA:</td>
+                                <td class="p-4 text-right text-brand-accent">$4,490 - $5,000 MXN</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="equipo" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-brand font-bold tracking-wide uppercase text-sm mb-2">Quienes Somos</h2>
+                <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900">Equipo 5</h3>
+                <p class="mt-4 text-slate-600 max-w-2xl mx-auto">Mentes jóvenes y comprometidas con la innovación tecnológica para un medio ambiente más limpio y seguro.</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-8 text-center max-w-4xl mx-auto">
+                <!-- Miembro 1 -->
+                <div>
+                    <div class="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-brand-light to-brand flex items-center justify-center text-white text-3xl font-bold mb-4 shadow-lg shadow-brand/20">
+                        AI
+                    </div>
+                    <h4 class="font-bold text-slate-900">Ana Isabel<br>Pérez Velázquez</h4>
+                </div>
+                <!-- Miembro 2 -->
+                <div>
+                    <div class="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-brand-light to-brand flex items-center justify-center text-white text-3xl font-bold mb-4 shadow-lg shadow-brand/20">
+                        GH
+                    </div>
+                    <h4 class="font-bold text-slate-900">Gabriel Hiram<br>Gonzalez Gonzalez</h4>
+                </div>
+                <!-- Miembro 3 -->
+                <div>
+                    <div class="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-brand-light to-brand flex items-center justify-center text-white text-3xl font-bold mb-4 shadow-lg shadow-brand/20">
+                        IS
+                    </div>
+                    <h4 class="font-bold text-slate-900">Ingrid Itzel<br>Sosa Alvarado</h4>
+                </div>
+                <!-- Miembro 4 -->
+                <div>
+                    <div class="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-brand-light to-brand flex items-center justify-center text-white text-3xl font-bold mb-4 shadow-lg shadow-brand/20">
+                        OC
+                    </div>
+                    <h4 class="font-bold text-slate-900">Olin Emiliano<br>Cisneros Lagarda</h4>
+                </div>
+                <!-- Miembro 5 -->
+                <div>
+                    <div class="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-brand-light to-brand flex items-center justify-center text-white text-3xl font-bold mb-4 shadow-lg shadow-brand/20">
+                        VC
+                    </div>
+                    <h4 class="font-bold text-slate-900">Valentina<br>Carbajal Rojas</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center gap-2 mb-4 md:mb-0">
+                <i class="fa-solid fa-droplet text-brand text-2xl"></i>
+                <span class="font-extrabold text-xl tracking-tighter text-white">CHIPAWAK</span>
+            </div>
+            <div class="text-sm text-center md:text-right">
+                <p>&copy; 2024 Proyecto CHIPAWAK - Equipo 5.</p>
+                <p>Desarrollado para el análisis y mitigación de microplásticos en el agua.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Lógica simple para el menú en dispositivos móviles
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Cerrar menú al hacer clic en un enlace (mobile)
+        const mobileLinks = menu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
